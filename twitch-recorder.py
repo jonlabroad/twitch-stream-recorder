@@ -79,6 +79,10 @@ class TwitchRecorder:
         except Exception as e:
             logging.error(e)
 
+        logging.info("Uploading...")
+        upload_to_s3.upload(processed_path)
+        logging.info("Upload complete")
+
         logging.info("checking for %s every %s seconds, recording with %s quality",
                      self.username, self.refresh, self.quality)
         self.loop_check(recorded_path, processed_path)
