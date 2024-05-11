@@ -30,12 +30,12 @@ async def upload_file(streamer, file_path):
 
 async def main(path):   
     # Process files
-    streamer_dirs = os.listdir(path)
-    print(f"Files: {streamer_dirs}")
+    files = os.listdir(path)
+    print(f"Files: {files}")
     for file in files:
         try:
-            full_path = os.path.join(streamer_full_dir, file)
-            await upload_file(f"{streamer_dir}/{file}", full_path)
+            full_path = os.path.join(path, file)
+            await upload_file(f"{path}/{file}", full_path)
         except Exception as e:
             print(e)
 
