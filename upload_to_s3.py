@@ -31,18 +31,13 @@ async def upload_file(streamer, file_path):
 async def main(path):   
     # Process files
     streamer_dirs = os.listdir(path)
-    print(f"Streamer Directories: {streamer_dirs}")
-    for streamer_dir in streamer_dirs:
-        streamer_full_dir = os.path.join(path, streamer_dir)
-        files = os.listdir(streamer_full_dir)
-        print(f"Files for streamer {streamer_dir}: {files}")
-        for file in files:
-            try:
-                full_path = os.path.join(streamer_full_dir, file)
-                await upload_file(f"{streamer_dir}/{file}", full_path)
-            except Exception as e:
-                print(e)
-
+    print(f"Files: {streamer_dirs}")
+    for file in files:
+        try:
+            full_path = os.path.join(streamer_full_dir, file)
+            await upload_file(f"{streamer_dir}/{file}", full_path)
+        except Exception as e:
+            print(e)
 
 def upload(path):
     asyncio.run(main(path))
