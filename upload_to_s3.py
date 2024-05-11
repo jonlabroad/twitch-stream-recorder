@@ -5,9 +5,9 @@ import asyncio
 # Initialize S3 client
 s3_client = boto3.client('s3')
 
-async def upload_file(streamer, file_path):
+async def upload_file(streamer, filename, file_path):
     print(f"Uploading file for streamer: {streamer}, File Path: {file_path}")
-    key = f"streams/{streamer}"
+    key = f"streams/{streamer}/{filename}"
 
     try:
         # Read file stream
@@ -28,16 +28,16 @@ async def upload_file(streamer, file_path):
         print(f"Error uploading file: {key}", e)
         raise e
 
-async def main(path):   
+async def main(streamer, path):   
     # Process files
     files = os.listdir(path)
     print(f"Files: {files}")
     for file in files:
         try:
             full_path = os.path.join(path, file)
-            await upload_file(f"{path}/{file}", full_path)
+            await upload_file(streamer, file, full_path)
         except Exception as e:
             print(e)
 
-def upload(path):
-    asyncio.run(main(path))
+def upload(streamer, path):
+    asyncio.run(main(streamer, path))

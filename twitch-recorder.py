@@ -80,7 +80,7 @@ class TwitchRecorder:
             logging.error(e)
 
         logging.info("Uploading...")
-        upload_to_s3.upload(processed_path)
+        upload_to_s3.upload(self.username, processed_path)
         logging.info("Upload complete")
 
         logging.info("checking for %s every %s seconds, recording with %s quality",
@@ -166,7 +166,7 @@ class TwitchRecorder:
                     logging.info("skip fixing, file not found")
 
                 logging.info("uploading...")
-                upload_to_s3.upload(processed_path)
+                upload_to_s3.upload(self.username, processed_path)
                 logging.info("upload complete")
 
                 logging.info("processing is done, going back to checking...")
