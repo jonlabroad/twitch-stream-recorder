@@ -12,6 +12,8 @@ import requests
 
 import config
 
+import upload_to_s3
+
 
 class TwitchResponseStatus(enum.Enum):
     ONLINE = 0
@@ -158,6 +160,10 @@ class TwitchRecorder:
                     self.process_recorded_file(recorded_filename, processed_filename)
                 else:
                     logging.info("skip fixing, file not found")
+
+                logging.info("uploading...")
+                upload_to_s3.upload(processed_path)
+                logging.info("upload complete")
 
                 logging.info("processing is done, going back to checking...")
                 time.sleep(self.refresh)
