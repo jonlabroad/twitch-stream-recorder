@@ -38,6 +38,7 @@ class TwitchRecorder:
         # twitch configuration
         self.client_id = config.client_id
         self.client_secret = config.client_secret
+        self.twitch_api_token = config.twitch_api_token
         self.token_url = "https://id.twitch.tv/oauth2/token?client_id=" + self.client_id + "&client_secret=" \
                          + self.client_secret + "&grant_type=client_credentials"
         self.url = "https://api.twitch.tv/helix/streams"
@@ -156,7 +157,7 @@ class TwitchRecorder:
 
                 # start streamlink process
                 subprocess.call(
-                    ["streamlink", "--twitch-disable-ads", "twitch.tv/" + self.username, self.quality,
+                    ["streamlink", "--twitch-disable-ads", "--twitch-api-header=Authorization=OAuth " + self.twitch_api_token, "twitch.tv/" + self.username, self.quality,
                      "-o", recorded_filename])
 
                 logging.info("recording stream is done, processing video file")
