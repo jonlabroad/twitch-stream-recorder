@@ -10,8 +10,6 @@ import time
 
 import requests
 
-import config
-
 import upload_to_s3
 
 
@@ -29,16 +27,16 @@ class TwitchRecorder:
         self.ffmpeg_path = "ffmpeg"
         self.disable_ffmpeg = False
         self.refresh = 15
-        self.root_path = config.root_path
+        self.root_path = os.environ.get("ROOT_PATH", "./data")
 
         # user configuration
-        self.username = config.username
+        self.username = os.environ.get("STREAMER")
         self.quality = "best"
 
         # twitch configuration
-        self.client_id = config.client_id
-        self.client_secret = config.client_secret
-        self.twitch_api_token = config.twitch_api_token
+        self.twitch_api_token = os.environ.get("TWITCH_API_TOKEN", "")
+        self.client_id = os.environ.get("CLIENT_ID", "")
+        self.client_secret = os.environ.get("CLIENT_SECRET", "")
         self.token_url = "https://id.twitch.tv/oauth2/token?client_id=" + self.client_id + "&client_secret=" \
                          + self.client_secret + "&grant_type=client_credentials"
         self.url = "https://api.twitch.tv/helix/streams"
