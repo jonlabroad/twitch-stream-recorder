@@ -1,5 +1,0 @@
-root_path = "/mnt/data"
-username = "<twitch username>"
-client_id = "<app client id>"
-client_secret = "<app client secret>"
-twitch_api_token = "<twitch api token>" # see https://streamlink.github.io/cli/plugins/twitch.html, just use the token here
